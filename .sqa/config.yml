@@ -1,0 +1,53 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: main
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    gitlab.fing.edu.uy/proyectogrado25/pg-front:
+      branch: collaborator_module
+      credential_tmp: true
+      repo: https://gitlab.fing.edu.uy/proyectogrado25/pg-front.git
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      gitlab.fing.edu.uy/proyectogrado25/pg-front git:
+        commands:
+        - /usr/bin/env sh .sqa/script.smelly-heliotrope-uakari.sh
+        container: qc.acc_chewy-burgundy-angelfish
+  QC.Doc:
+    repos:
+      gitlab.fing.edu.uy/proyectogrado25/pg-front find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.flaky-khaki-alligator.sh
+        container: qc.doc_pasty-cornflower-eleuth
+      gitlab.fing.edu.uy/proyectogrado25/pg-front git:
+        commands:
+        - /usr/bin/env sh .sqa/script.nerdy-cinnamon-ray.sh
+        container: qc.doc_gimpy-cinnabar-bat
+      gitlab.fing.edu.uy/proyectogrado25/pg-front markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.squirrely-denim-sloth.sh
+        container: qc.doc_blurry-amber-ferret
+  QC.Lic:
+    repos:
+      gitlab.fing.edu.uy/proyectogrado25/pg-front licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.silly-cyan-barb.sh
+        container: qc.lic_silly-platinum-crocodile
+  QC.Sty:
+    repos:
+      gitlab.fing.edu.uy/proyectogrado25/pg-front jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.cozy-tangerine-deer.sh
+        container: qc.sty_cloudy-sangria-cuttlefish
+  QC.Ver:
+    repos:
+      gitlab.fing.edu.uy/proyectogrado25/pg-front get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.pokey-fuchsia-jackal.sh
+        container: qc.ver_ready-denim-sheep
+timeout: 5400
